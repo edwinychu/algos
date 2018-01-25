@@ -1,33 +1,37 @@
 var exist = function(board, word) {
-  var boggle = function(i, j, board, path) {
+  if (word.length === 0) {
+    return [];
+  }
+
+  var wordSearch = function(row, col, board, index) {
     if (
-      i < 0 ||
-      i > board.length - 1 ||
-      j < 0 ||
-      j > board[0].length - 1 ||
-      board[i][j] !== word[path] ||
-      board[i][j] === "#"
+      row < 0 ||
+      row > board.length - 1 ||
+      col < 0 ||
+      col > board[0].length - 1 ||
+      board[row][col] !== word[index] ||
+      board[row][col] === "#"
     ) {
       return false;
     }
-    if (path === word.length - 1) {
+    if (index === word.length - 1) {
       return true;
     }
-    var letterCopy = board[i][j];
-    board[i][j] = "#";
-    if (boggle(i - 1, j, board, path + 1)) return true;
-    if (boggle(i, j + 1, board, path + 1)) return true;
-    if (boggle(i + 1, j, board, path + 1)) return true;
-    if (boggle(i, j - 1, board, path + 1)) return true;
-    board[i][j] = letterCopy;
+    var letterCopy = board[row][col];
+    board[row][col] = "#"; //mark as visited
+
+    if (wordSearch(row - 1, col, board, index + 1)) return true;
+    if (wordSearch(row + 1, col, board, index + 1)) return true;
+    if (wordSearch(row, col - 1, board, index + 1)) return true;
+    if (wordSearch(row, col + 1, board, index + 1)) return true;
+
+    board[row][col] = letterCopy;
     return false;
   };
 
   for (var i = 0; i < board.length; i++) {
     for (var j = 0; j < board[0].length; j++) {
-      if (boggle(i, j, board, 0)) {
-        return true;
-      }
+      if (wordSearch(i, j, board, 0)) return true;
     }
   }
 
