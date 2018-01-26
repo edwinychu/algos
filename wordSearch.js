@@ -15,6 +15,7 @@ var exist = function(board, word) {
       return false;
     }
     if (index === word.length - 1) {
+      console.log(index);
       return true;
     }
     var letterCopy = board[row][col];
@@ -37,3 +38,4 @@ var exist = function(board, word) {
 
   return false;
 };
+

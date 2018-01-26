@@ -9,3 +9,5 @@ var subsets = function(nums) {
   backtrack(0, []);
   return output;
 };
+
+console.log(subsets([1,2,3]));
