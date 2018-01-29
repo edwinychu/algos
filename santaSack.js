@@ -3,7 +3,7 @@ const knapsack = (items, capacity) => {
   var results = [];
   let maxCombo = [];
   let recurse = (index, value, weight, array) => {
-  
+
     if (index === items.length) {
       if (value > max && weight <= capacity) {
         max = value;
@@ -11,15 +11,22 @@ const knapsack = (items, capacity) => {
       }
       return;
     }
+    
     if (weight > capacity) {
       return;
     }
+
     if (value > max) {
       max = value;
       maxCombo = array;
     }
 
+    // for (let i = index; i < items.length; i++) {
+    //   recurse(i, value + items[i].value, weight + items[i].weight, array.concat(items[i]));
+    // }
+
     recurse(index+1, value + items[index].value, weight + items[index].weight, array.concat(items[index]));
+
     recurse(index+1, value, weight, array);
 
   }

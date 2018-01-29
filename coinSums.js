@@ -2,7 +2,16 @@ let coinSums = (coins, amount) => {
   let results = [];
   
   let recurse = (coinIndex, sum, arr) => {
-    
+
+    if (coinIndex === coins.length) {
+      if (sum > amount) {
+        return;
+      }
+      if (sum === amount) {
+        results.push(arr);
+        return;
+      }
+    }
 
     if (sum > amount) {
       return;

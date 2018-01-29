@@ -1,7 +1,29 @@
 const knapsack = (items, capacity) => {
+  let result;
+  let max = 0;
+  const recurse = (index, value, weight, array) => {
+    if (index === items.length) {
+      if (weight <= capacity && value > max) {
+        result = array;
+        max = value;
+      }
+      return;
+    }
+    if (weight > capacity) {
+      return;
+    }
+    if (value > max) {
+      result = array;
+      max = value;
+    }
+    //one path including item in knapsack
+    recurse(index+1, value + items[index].value, weight + items[index].weight, array.concat(items[index]));
+    //another path without item in knapsack
+    recurse(index+1, value, weight, array);
+  }
 
-
-
+  recurse(0, 0, 0, []);
+  return result;
 };
 
 const item0 = { weight: 9, value: 8 };
