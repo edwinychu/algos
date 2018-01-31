@@ -14,4 +14,4 @@ var powerSet = function(set) {
 }
 
 
-console.log(powerSet(['a','b']));
+console.log(powerSet(['a','b','c']));
