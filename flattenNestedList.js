@@ -13,6 +13,22 @@ const flattenNestedList = (array) => {
   }, []);
 }
 
+const flatten = (array) => {
+  if (!Array.isArray(array)) {
+    return array;
+  }
+  
+  let newArr = [];//accumulator
+
+  for (let i=0; i<array.length; i++) {
+    newArr = newArr.concat(flatten(array[i]));
+  }
+
+  return newArr;
+
+}
+
+
 const array = [1,[2,[3]]];
-const f = flattenNestedList(array);
+const f = flatten(array);
 console.log(f);
