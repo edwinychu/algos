@@ -9,6 +9,8 @@ const connectAllSiblings = (root) => {
     if (current.right) {
       queue.push(current.right);
     }
+    
+    //last check because if there's no more nodes in the queue, that means we've reached the end of the tree
     if (queue.length === 0) {
       current.next = null;
     } else {
