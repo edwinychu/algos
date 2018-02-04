@@ -2,7 +2,7 @@ const scoreNRuns = (runs) => {
   const scores = [1,2,4];
   let results = [];
 
-  const recurse = (currentRuns, possibilities) => {
+  const recurse = (index, currentRuns, possibilities) => {
     if (currentRuns > runs) {
       return;
     }
@@ -11,13 +11,13 @@ const scoreNRuns = (runs) => {
       results.push(possibilities);
       return;
     }
-
+    
     for (let i=0; i<scores.length; i++) {
-      recurse(currentRuns + scores[i], possibilities.concat(scores[i]));
+      recurse(i, currentRuns + scores[i], possibilities.concat(scores[i]));
     }
   }
 
-  recurse(0, []);
+  recurse(0, 0, []);
   return results;
 }
 
