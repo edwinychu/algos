@@ -1,70 +1,38 @@
-/**
- * // This is the interface that allows for creating nested lists.
- * // You should not implement it, or speculate about its implementation
- * function NestedInteger() {
- *
- *     Return true if this NestedInteger holds a single integer, rather than a nested list.
- *     @return {boolean}
- *     this.isInteger = function() {
- *         ...
- *     };
- *
- *     Return the single integer that this NestedInteger holds, if it holds a single integer
- *     Return null if this NestedInteger holds a nested list
- *     @return {integer}
- *     this.getInteger = function() {
- *         ...
- *     };
- *
- *     Return the nested list that this NestedInteger holds, if it holds a nested list
- *     Return null if this NestedInteger holds a single integer
- *     @return {NestedInteger[]}
- *     this.getList = function() {
- *         ...
- *     };
- * };
- */
-/**
- * @constructor
- * @param {NestedInteger[]} nestedList
- */
-var NestedIterator = function(nestedList) {
-  this.stack = [];
-  for (let i = nestedList.length - 1; i >= 0; i--) {
-    this.stack.push(nestedList[i]);
-  }
-};
-
-/**
- * @this NestedIterator
- * @returns {boolean}
- */
-NestedIterator.prototype.hasNext = function() {
-  while (this.stack.length > 0) {
-    let current = this.stack[this.stack.length - 1];
-    if (current.isInteger()) {
-      return true;
-    } else {
-      this.stack.pop();
-      current = current.getList();
-      for (let i = current.length - 1; i >= 0; i--) {
-        this.stack.push(current[i]);
-      }
+class NestedListIterator {
+  //populates stack with items in nested list
+  constructor(NestedList) {
+    this.stack = [];
+    for (let i=NestedList.length - 1; i>=0; i--) {
+      this.stack.push(NestedList[i]);
     }
   }
-  return false;
-};
 
-/**
- * @this NestedIterator
- * @returns {integer}
- */
-NestedIterator.prototype.next = function() {
-  return this.stack.pop();
-};
+  hasNext() {
+    //only returns true if stack is not empty and if the top most item in stack is an integer
+    while (this.stack.length > 0) {
+      let current = this.stack[this.stack.length - 1];
+      if (!Array.isArray(current)) {
+        return true;
+      } else {
+        current = this.stack.pop();
+        for (let i=current.length - 1; i>=0; i--) {
+          this.stack.push(current[i]);
+        }
+      }
+    }
+    return false;
+  }
 
-/**
- * Your NestedIterator will be called like this:
- * var i = new NestedIterator(nestedList), a = [];
- * while (i.hasNext()) a.push(i.next());
- */
+  next() {
+    return this.stack.pop();
+  }
+
+}
+
+const nestedArray = [1,[2,[3,[4,[5,[]]]]]];
+const iterator = new NestedListIterator(nestedArray);
+const a = [];
+while (iterator.hasNext()) {
+  a.push(iterator.next());
+}
+console.log(a);
