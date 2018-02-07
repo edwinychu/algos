@@ -26,9 +26,6 @@ const regularExpressionMatching = (string, expression) => {
     } else if (stringIndex < string.length && expressionIndex < expression.length && (expression[expressionIndex] === '.' || expression[expressionIndex] === string[stringIndex])) {
       return recurse(stringIndex + 1, expressionIndex + 1);
     }
-
-
-
     return false;
 
   }
