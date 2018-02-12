@@ -9,7 +9,7 @@ const maxSum = (array) => {
   }
   console.log(dp);
   return Math.max(dp[dp.length - 1], dp[dp.length - 2]);
-
+  
 }
 
 const array = [-1,-2,-3,-4,-5];
