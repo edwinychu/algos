@@ -14,4 +14,4 @@ let moveZeroes = (array) => {
 }
 
 
-console.log(moveZeroes([]))
+console.log(moveZeroes([1,2,3,0,0]))
