@@ -8,7 +8,6 @@ Function.prototype.bind = function(context){
     }
 }
 
-
 Function.prototype.call = function(context) {
     var args = [].slice.call(arguments, 1);
     return this.apply(context, arguments);
