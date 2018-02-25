@@ -1,12 +1,12 @@
 var squareRoot = function(n) {
   var low = 0;
   var high = 1 + n/2.0;
-  while (low < high) {
+  while (low <= high) {
     var mid = (low + high) / 2;
     var square = mid * mid;
     var diff = Math.abs(n - square);
 
-    if (diff <= 0.000000000000001) {
+    if (diff <= 0.00001) {
       return mid;
     }
 
@@ -20,4 +20,4 @@ var squareRoot = function(n) {
 }
 
 
-console.log(squareRoot(9));
+console.log(squareRoot(48));
