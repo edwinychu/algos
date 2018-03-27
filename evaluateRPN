@@ -1,0 +1,39 @@
+/**
+ * @param {string[]} tokens
+ * @return {number}
+ */
+var evalRPN = function(tokens) {
+    let stack = [];
+    // iterate through tokens
+        // if token is int, push onto stack
+    
+        // else
+            // pop top two elements from stack and apply operand to numbers
+            // push resulting number back onto stack
+    
+    // return number on top of stack
+    
+    for (let i=0; i<tokens.length; i++) {
+        let token = tokens[i];
+        if (Number.isInteger(parseInt(token))) {
+            stack.push(token);
+        } else {
+            let operand2 = stack.pop();
+            let operand1 = stack.pop();
+            let newOperand = null;
+            if (token === '+') {
+                newOperand = parseInt(operand2) + parseInt(operand1);
+            } else if (token === '-') {
+                newOperand = parseInt(operand1) - parseInt(operand2);
+            } else if (token === '*') {
+                newOperand = parseInt(operand2) * parseInt(operand1);
+            } else {
+                newOperand = parseInt(operand1) / parseInt(operand2);
+            }
+            stack.push(newOperand);
+        }
+    }
+    
+    return parseInt(stack[0])
+    
+};
