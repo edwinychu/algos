@@ -1,0 +1,26 @@
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function(s) {
+
+    // iterate through string 
+    
+        // if char is '(', '{', or '[' then push closing bracket onto stack
+    
+        // else , stack.pop() should match char
+    let stack = [];
+    for (let i=0; i<s.length; i++) {
+        let char = s[i];
+        if (char === '(' || char === '{' || char === '[')  {
+            if (char === '(') stack.push(')');
+            if (char === '{') stack.push('}');
+            if (char === '[') stack.push(']');
+        } else {
+            let shouldBe = stack.pop();
+            if (shouldBe !== char) return false;
+        }
+        
+    }
+    return stack.length > 0 ? false : true;
+};
